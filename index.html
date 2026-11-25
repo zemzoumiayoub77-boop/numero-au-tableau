@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Numéro au tableau</title>
+<meta name="theme-color" content="#1d3b31">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Au tableau">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="top">
+      <h1 data-i18n="title">Numéro au tableau</h1>
+      <div class="top-actions" role="group" aria-label="Langue / Language / اللغة"><button class="ghost lg" type="button" data-lang="fr" lang="fr">Français</button><button class="ghost lg" type="button" data-lang="en" lang="en">English</button><button class="ghost lg" type="button" data-lang="ar" lang="ar">العربية</button><button class="ghost danger" id="install" type="button" data-i18n="install" hidden>Installer l'application</button></div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <section class="board" id="drawBoard" aria-label="Tirage">
+      <button class="ghost board-fullscreen" id="fullscreen" type="button">Plein écran</button>
+      <p class="q" id="boardQuestion">Qui passe au tableau ?</p>
+      <p class="eyebrow" data-i18n="eyebrow">Élève n°</p>
+      <div class="num" id="num" aria-hidden="true">?</div>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+      <button class="go" id="go" type="button">Tirer au sort</button>
+      <button class="ghost redraw" id="absentRedraw" type="button" data-i18n="absentRedraw" hidden>Absent : tirer un autre</button>
+      <div class="tray" aria-hidden="true"></div>
+    </section>
+
+    <div class="side">
+      <section class="card" aria-label="Numéros">
+        <div class="row">
+          <label class="check" for="nbEleves"><span data-i18n="nb">Nombre d'élèves</span>
+            <input id="nbEleves" class="nb" type="number" min="2" max="200" value="35" inputmode="numeric">
+          </label>
+          <div class="actions"><button class="ghost" id="reset" type="button" data-i18n="reset">Effacer les passages</button><button class="ghost" id="newSession" type="button" data-i18n="newSession">Nouvelle séance</button><button class="ghost" id="exportCsv" type="button" data-i18n="exportCsv">Exporter les passages (CSV)</button></div>
+        </div>
+        <p class="hint" id="note" role="status" aria-live="polite"></p>
+        <div class="confirm" id="confirmBar" role="alertdialog" aria-labelledby="confirmText" hidden>
+          <p id="confirmText" data-i18n="confirmNew">Commencer une nouvelle séance et effacer les passages ainsi que les absences ?</p>
+          <div class="actions">
+            <button class="ghost danger" id="confirmYes" type="button" data-i18n="confirmYes">Oui, effacer</button>
+            <button class="ghost" id="confirmNo" type="button" data-i18n="confirmNo">Annuler</button>
+          </div>
+        </div>
+        <div class="row">
+          <label class="check"><input type="checkbox" id="norepeat" checked> <span data-i18n="norepeat">Ne pas répéter un numéro</span></label>
+          <label class="check"><input type="checkbox" id="sound" checked> <span data-i18n="sound">Son pendant le tirage</span></label>
+        </div>
+        <p class="count" id="count"></p>
+        <div class="grid" id="grid"></div>
+        <p class="hint" data-i18n="hint">Touchez un numéro pour l'exclure (élève absent). Touchez-le encore pour le remettre.</p>
+      </section>
+
+      <section class="card" aria-label="Historique">
+        <h2 data-i18n="historyH">Déjà passés</h2>
+        <ol class="history" id="history"></ol>
+        <p class="empty" id="historyEmpty" data-i18n="historyEmpty">Aucun tirage pour l'instant.</p>
+      </section>
+    </div>
+  </div>
+</div>
+<script src="app.js"></script>
+<script src="pwa.js"></script>
+</body>
+</html>
